@@ -5,7 +5,7 @@ later!
 
 === VERSION ===
 
-1.0.1
+1.0.2
 
 === MOTIVATION ===
 
@@ -27,7 +27,7 @@ Hence I started wondering what if there was a system to warn me somehow...
 
 === A SOLUTION ===
 
-The idea is simple take a proposed function/alias name and spit out known
+The idea is simple: take a proposed function/alias name and spit out known
 commands sorted by edit distance from the proposed name. The sort order is
 reversed so users can see the closest results without needing to scroll up or
 pipe to a pager.
@@ -73,6 +73,6 @@ may be spun up as another project.
 
 === CHANGELOG ===
 
+v1.0.2: minor doc grammar fix
 v1.0.1: minor documentation fix
-
 v1.0.0: initial implementation
