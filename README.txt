@@ -5,7 +5,7 @@ later!
 
 === VERSION ===
 
-1.0.0
+1.0.1
 
 === MOTIVATION ===
 
@@ -39,7 +39,7 @@ when it turns out the alias shadows some later installed executables.
 
 === USAGE ===
 
-name_safe_in_bash <proposed_name>
+name-safe-in-bash <proposed_name>
 
 === LICENSE ===
 
@@ -72,5 +72,7 @@ It would also be nice to generalize this to shells beyond just Bash though that
 may be spun up as another project.
 
 === CHANGELOG ===
+
+v1.0.1: minor documentation fix
 
 v1.0.0: initial implementation
