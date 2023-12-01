@@ -1,23 +1,23 @@
 #!/bin/bash -i
 
-output_shell_builtins_and_keywords() { compgen -b -k;}
+output_shell_builtins_and_keywords(){ compgen -b -k;}
 
 # Here we use the more cryptic one letter options instead of the longer somewhat
 # less cryptic ones supported by GNU coreutils to allow for environments where
 # Bash is being used with other coreutils implementations.
-output_shell_function_names() { declare -F | cut -d ' ' -f 3;}
-output_shell_alias_names() { alias | cut -d = -f 1 | cut -d ' ' -f 2;}
+output_shell_function_names(){ declare -F | cut -d ' ' -f 3;}
+output_shell_alias_names(){ alias | cut -d = -f 1 | cut -d ' ' -f 2;}
 
 # Limitation: if for some unholy/unlikely reason there's a space in any of the
 # directories in PATH or in executable names this will fail.
-output_commands_found_in_path() {
+output_commands_found_in_path(){
   local directory
   for directory in `echo $PATH | sed 's/:/ /g'`; do
     ls -A $directory 2>/dev/null; done;}
 
-output_name_if_known_to_dnf() { dnf provides "$1" >/dev/null 2>&1 && echo "$1";}
-output_name_if_known_to_yum() { yum provides "$1" >/dev/null 2>&1 && echo "$1";}
-output_name_if_known_to_zypper() { zypper what-provides "$1" >/dev/null 2>&1 && echo "$1";}
+output_name_if_known_to_dnf(){ dnf provides "$1" >/dev/null 2>&1 && echo "$1";}
+output_name_if_known_to_yum(){ yum provides "$1" >/dev/null 2>&1 && echo "$1";}
+output_name_if_known_to_zypper(){ zypper what-provides "$1" >/dev/null 2>&1 && echo "$1";}
 
 output_names_for_edit_distance_comparision() {
   local -r proposed_name="$1"
@@ -31,7 +31,7 @@ output_names_for_edit_distance_comparision() {
 
 # Taken from here with some very slight modifications:
 # https://gist.github.com/benpitman/e1e3c158040dc78b017ce7ac6b94a9fa 
-output_levenshtein_distance() {
+output_levenshtein_distance(){
     local -r -- target=$1
     local -r -- given=$2
     local -r -- targetLength=${#target}
@@ -73,16 +73,17 @@ output_levenshtein_distance() {
     done
     echo $lowest;}
 
-show_basic_usage() { echo 'usage: name-safe-in-bash <proposed_name>'; exit;}
+show_basic_usage(){ echo 'usage: name-safe-in-bash <proposed_name>'; exit;}
 
-main() {
+main(){
   if [ $# != 1 ]; then show_basic_usage; fi
   local -r proposed_name="$1"
+  local maybe_similar_names=`
+    output_names_for_edit_distance_comparision "$proposed_name"`
   local maybe_similar_name
-  for maybe_similar_name in `output_names_for_edit_distance_comparision`; do
-    echo \
-      `output_levenshtein_distance "$proposed_name" "$maybe_similar_name"` \
-      "$maybe_similar_name"
-  done | sort -n -r;}
+  for maybe_similar_name in $maybe_similar_names; do
+    local levenshtein_distance=`
+      output_levenshtein_distance "$proposed_name" "$maybe_similar_name"`
+    echo $levenshtein_distance "$maybe_similar_name"; done | sort -n -r;}
 
 main "$@"

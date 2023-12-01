@@ -5,7 +5,7 @@ later!
 
 === VERSION ===
 
-1.0.2
+1.1.0
 
 === MOTIVATION ===
 
@@ -73,6 +73,7 @@ may be spun up as another project.
 
 === CHANGELOG ===
 
+v1.1.0: package manager integration bug fix
 v1.0.2: minor doc grammar fix
 v1.0.1: minor documentation fix
 v1.0.0: initial implementation
