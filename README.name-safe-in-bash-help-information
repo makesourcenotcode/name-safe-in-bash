@@ -1,6 +1,6 @@
 === SUMMARY ===
 
-version: 1.1.1
+version: 1.1.2 | home: https://github.com/makesourcenotcode/name-safe-in-bash
 
 Help choosing Bash alias and function names that WON'T come back to bite you
 later!
@@ -71,6 +71,7 @@ may be spun up as another project.
 
 === CHANGELOG ===
 
+v1.1.2: minor documentation improvement
 v1.1.1: improved documentation
 v1.1.0: package manager integration bug fix
 v1.0.2: minor doc grammar fix
